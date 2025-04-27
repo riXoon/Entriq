@@ -9,6 +9,44 @@
 </head>
 <body>
 
+    <div class="modal-bg"></div> <!-- **MODAL BACKGROUND TO MAN -->
+
+    <!-- **ADDED PRODUCT MODAL -->
+    <!-- For Add Product Confirmation -->
+<div class="addCart-container" id="cartModal">
+    <img src="../../Assets/cart.png" alt="" class="errorIcon">
+    <p class="cookieHeading">Item Added to the Cart!</p>
+    <p class="cookieDescription">Nice choice! What's next?</p>
+    <div class="buttonContainer">
+        <button class="acceptButton" id="okayButtonAdd">Okay</button>
+    </div>
+</div>
+
+<!-- For Edit Product Confirmation -->
+<div class="addCart-container" id="editModal">
+    <img src="../../Assets/cart.png" alt="" class="errorIcon">
+    <p class="cookieHeading">Item Updated!</p>
+    <p class="cookieDescription">Your changes have been saved.</p>
+    <div class="buttonContainer">
+        <button class="acceptButton" id="okayButtonEdit">Okay</button>
+    </div>
+</div>
+
+
+    <!-- **ADDED PRODUCT CONFIRMATION MODAL -->
+    <div class="loading-container" id="loading-container">
+        <div class="modal-bg"></div>
+         <div class="wrapper">
+             <div class="circle"></div>
+             <div class="circle"></div>
+             <div class="circle"></div>
+             <div class="shadow"></div>
+             <div class="shadow"></div>
+             <div class="shadow"></div>
+            </div>
+            <h1 class="loading-txt">Processing you request, please wait.</h1>
+    </div>
+
 
     <div class="container">
         <aside class="sidebar">
@@ -222,123 +260,11 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-                const addProductBtn = document.querySelector('.add-product-btn');
-                const editButtons = document.querySelectorAll('.edit-btn');
-                const addProductModal = document.getElementById('addProductModal');
-                const editProductModal = document.getElementById('editProductModal');
-                const closeAddModal = addProductModal.querySelector('.close-button');
-                const closeEditModal = editProductModal.querySelector('.edit-close-button');
-
-                // Function to open a modal
-                function openModal(modal) {
-                    modal.style.display = 'block';
-                }
-
-                // Function to close a modal
-                function closeModal(modal) {
-                    modal.style.display = 'none';
-                }
-
-                // Event listener for the "Add Product" button
-                addProductBtn.addEventListener('click', function() {
-                    openModal(addProductModal);
-                });
-
-                // Event listeners for the "Edit Product" buttons
-                editButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        // In a real application, you would fetch the product data
-                        // associated with this edit button and populate the edit form.
-                        // For now, we'll just open the modal.
-                        openModal(editProductModal);
-
-                        // Example of how you might pre-fill the edit form (replace with your actual data)
-                        const productCard = this.closest('.product-card');
-                        const productName = productCard.querySelector('.product-details h3').textContent;
-                        const productPrice = productCard.querySelector('.price').textContent;
-
-                        document.getElementById('editProductName').value = productName;
-                        document.getElementById('editPrice').value = productPrice;
-                        // You would do the same for other fields like description and quantity.
-
-                        // You might also want to store the product ID in a hidden field
-                        // in the edit form so you know which product to update.
-                        // document.getElementById('editProductId').value = productId;
-                    });
-                });
-
-                // Event listener to close the "Add Product" modal
-                closeAddModal.addEventListener('click', function() {
-                    closeModal(addProductModal);
-                });
-
-                // Event listener to close the "Edit Product" modal
-                closeEditModal.addEventListener('click', function() {
-                    closeModal(editProductModal);
-                });
-
-                // Close modals if the user clicks outside of them
-                window.addEventListener('click', function(event) {
-                    if (event.target === addProductModal) {
-                        closeModal(addProductModal);
-                    }
-                    if (event.target === editProductModal) {
-                        closeModal(editProductModal);
-                    }
-                });
-
-                // --- Optional: Handle Form Submissions (Add Product) ---
-                const addProductForm = document.getElementById('addProductForm');
-                addProductForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent the default form submission
-
-                    // Get the values from the form
-                    const productName = document.getElementById('productName').value;
-                    const description = document.getElementById('description').value;
-                    const quantity = document.getElementById('quantity').value;
-                    const stockQuantityElement = productCard.querySelector('.stock-quantity');
-                    const productQuantity = stockQuantityElement ? stockQuantityElement.textContent : '';
-                    const price = document.getElementById('price').value;
-                    const imageInput = document.getElementById('imageInput');
-                    const imageFile = imageInput.files[0]; // Get the selected file
-
-                    // You would typically send this data to your server to add the new product
-                    console.log('Adding Product:', { productName, description, quantity, price, imageFile });
-
-                    // After successful submission, you might want to:
-                    // 1. Close the modal
-                    closeModal(addProductModal);
-                    // 2. Optionally, update the product grid on the page to show the new product
-                    // 3. Reset the form
-                    addProductForm.reset();
-                });
-
-                // --- Optional: Handle Form Submissions (Edit Product) ---
-                const editProductForm = document.getElementById('editProductForm');
-                editProductForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent the default form submission
-
-                    // Get the values from the edit form
-                    const productId = document.getElementById('editProductId').value; // If you added this hidden field
-                    const productName = document.getElementById('editProductName').value;
-                    const description = document.getElementById('editDescription').value;
-                    const quantity = document.getElementById('editQuantity').value;
-                    const price = document.getElementById('editPrice').value;
-                    const editImageInput = document.getElementById('editImageInput');
-                    const editImageFile = editImageInput.files[0]; // Get the selected file
-
-                    // You would typically send this data to your server to update the product
-                    console.log('Editing Product:', { productId, productName, description, quantity, price, editImageFile });
-
-                    // After successful submission, you might want to:
-                    // 1. Close the modal
-                    closeModal(editProductModal);
-                    // 2. Optionally, update the corresponding product card in the grid
-                    // 3. Reset the form (or just the relevant parts)
-                });
-            });
+        
         </script>
+
+
+    <script src="../../JS/EnterprisePage/product.js"></script>
 
     </body>
 </html>
